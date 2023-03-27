@@ -18,23 +18,17 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request){
         $validated = $request->validated();
-        $check = User::where('email', $validated['email'])->first();
-
-        if($check == null){
-            return $this->apiError('You`re not user customer!', 400);
-        }else{
-            if(!Auth::attempt($validated)){
-                return $this->apiError('Credentials not match', Response::HTTP_UNAUTHORIZED);
-            }
-            $user = User::where('email', $validated['email'])->first();
-            $token = $user->createToken($validated['email'])->plainTextToken;
-
-            return $this->apiSuccess([
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-                'user' => $user
-            ]);
+        if(!Auth::attempt($validated)){
+            return $this->apiError('Credentials not match', Response::HTTP_UNAUTHORIZED);
         }
+        $user = User::where('email', $validated['email'])->first();
+        $token = $user->createToken($validated['email'])->plainTextToken;
+
+        return $this->apiSuccess([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'user' => $user
+        ]);
     }
 
     public function register(RegisterRequest $request)

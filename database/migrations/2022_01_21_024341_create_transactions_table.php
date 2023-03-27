@@ -14,10 +14,10 @@ class CreateTransactionsTable extends Migration
     public function up()
     {
         Schema::create('transactions', function (Blueprint $table) {
-            $table->id('transaction_id');
+            $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('category_id')->constrained();
-            $table->float('amount');
+            $table->enum('category', ['income', 'expenditure'])->default('expenditure');
+            $table->double('amount');
             $table->text('description');
             $table->timestamps();
         });
