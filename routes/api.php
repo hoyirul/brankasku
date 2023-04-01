@@ -27,4 +27,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 
     Route::get('/transactions', [TransactionController::class, 'index']);
+    Route::get('/by_month', [TransactionController::class, 'getByMonth']);
 });

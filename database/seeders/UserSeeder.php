@@ -15,8 +15,13 @@ class UserSeeder extends Seeder
     {
         $data = [
             [
-                'name' => 'SECRET',
-                'email' => 'secret@example.com',
+                'name' => 'Mochammad Hairullah',
+                'email' => 'madhai@example.com',
+                'password' => 'password'
+            ],
+            [
+                'name' => 'Elvira Sania Mufida',
+                'email' => 'elsa@example.com',
                 'password' => 'password'
             ]
         ];
